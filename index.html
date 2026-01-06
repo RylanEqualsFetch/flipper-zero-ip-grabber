@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Loading…</title>
-</head>
 <body>
-  <script>
-    fetch("/.netlify/functions/hit?os=unknown");
-  </script>
+  <h1 id="status">Loading...</h1>
 
-  <h1>Loading…</h1>
+  <script>
+    fetch("/.netlify/functions/hit" + location.search)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("status").textContent =
+          "Your IP is: " + data.ip;
+      });
+  </script>
 </body>
 </html>
